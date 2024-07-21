@@ -11,3 +11,6 @@
 	ui = true
 [pull]
 	rebase = true
+
+[url "ssh://git@github.com/{{ .github_user }}"]
+	insteadOf = https://github.com/{{ .github_user }}
