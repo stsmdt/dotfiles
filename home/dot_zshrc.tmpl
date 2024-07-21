@@ -28,24 +28,11 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-{{ if eq .chezmoi.os "darwin" -}}
 plugins=(
-    brew
-    git
-    golang
-    per-directory-history
-    sudo
-    zsh-syntax-highlighting
+{{- range .zshPlugins }}
+    {{ . }}
+{{- end }}
 )
-{{ else if eq .chezmoi.os "linux" -}}
-plugins=(
-    git
-    golang
-    per-directory-history
-    sudo
-    zsh-syntax-highlighting
-)
-{{ end -}}
 
 source $ZSH/oh-my-zsh.sh
 

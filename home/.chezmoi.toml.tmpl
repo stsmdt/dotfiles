@@ -9,3 +9,13 @@
 [data]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+    zshPlugins = [
+{{ if eq .chezmoi.os "darwin" }}
+        "brew",
+{{ end -}}
+        "git",
+        "golang",
+        "per-directory-history",
+        "sudo",
+        "zsh-syntax-highlighting",
+    ]
