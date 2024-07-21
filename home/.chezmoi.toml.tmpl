@@ -1,0 +1,11 @@
+{{- $name := "Steffen Schmidt" -}}
+{{- $email := "git@brombeersaft.com" -}}
+
+{{- if (env "ASK") }}
+{{-   $name = promptString "Full Name" $name -}}
+{{-   $email = promptString "Email" $email -}}
+{{- end }}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
