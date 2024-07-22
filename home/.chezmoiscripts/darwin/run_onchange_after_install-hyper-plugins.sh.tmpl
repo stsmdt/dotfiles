@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $plugins := list
+     "hyper-night-owl"
+     "hyper-pane" -}}
+
+{{ range ($plugins | sortAlpha | uniq) -}}
+hyper install "{{ . }}"
+{{ end -}}
