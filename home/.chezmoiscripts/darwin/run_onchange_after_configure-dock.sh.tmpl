@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+trap 'killall Dock' EXIT
+
+{{ $dockApps := list
+     "/System/Applications/Messages.app/"
+     "/Applications/WhatsApp.app"
+     "/Applications/Discord.app"
+     "space"
+     "/Applications/Google Chrome.app"
+     "/Applications/Hyper.app"
+     "/Applications/Visual Studio Code.app"
+     "space"
+     "/Applications/Pages.app"
+     "/Applications/Numbers.app"
+     "/Applications/Keynote.app"
+     "space"
+     "/Applications/Spotify.app"
+     "/Applications/VLC.app" -}}
+
+dockutil --no-restart --remove all
+
+{{ range $dockApps }}
+  {{- if ne . "space" -}}
+  dockutil --no-restart --add  "{{ . }}"
+  {{- else -}}
+  dockutil --no-restart --add "" --type small-spacer --section apps
+  {{- end }}
+{{ end -}}
+dockutil --no-restart --add "/Applications" --section others --display folder --view grid --sort name
