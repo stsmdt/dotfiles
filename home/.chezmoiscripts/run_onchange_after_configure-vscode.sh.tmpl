@@ -1,0 +1,22 @@
+{{ if (eq .chezmoi.os "darwin" "linux") -}}
+
+{{ $extensions := list
+     "bradlc.vscode-tailwindcss"
+     "eamodio.gitlens"
+     "EditorConfig.EditorConfig"
+     "golang.go"
+     "ms-python.python"
+     "sdras.night-owl"
+     "streetsidesoftware.code-spell-checker"
+     "vscode-icons-team.vscode-icons"
+     "Vue.volar" -}}
+
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ range $extensions -}}
+code --force --install-extension {{ . }}
+{{ end -}}
+
+{{ end -}}
